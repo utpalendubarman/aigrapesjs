@@ -1,0 +1,17 @@
+{
+  "name": "grapes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "grapesjs": "^0.22.6",
+    "grapesjs-preset-webpage": "^0.1.11",
+    "i": "^0.3.7",
+    "npm": "^11.2.0"
+  }
+}

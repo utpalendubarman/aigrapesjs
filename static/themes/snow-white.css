@@ -1,0 +1,17 @@
+.gjs-one-bg,
+.gjs-pn-panel {
+    background-color: #ffffff !important;
+}
+
+.gjs-two-color {
+    color: #000 !important;
+}
+
+.gjs-three-bg {
+    background-color: #f8f9fa !important;
+}
+
+.gjs-four-color,
+.gjs-four-color-h:hover {
+    color: #0d6efd !important;
+}

@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'gjs-fonts';
+    src: url('/static/fonts/gjs-fonts.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+  
+  body, html {
+    background-color: #1e1e1e;
+  }
+  
+
+  .gjs-one-bg, 
+  .gjs-pn-panel {
+    background-color: #1e1e1e !important;
+  }
+
+  .gjs-two-color, 
+  .gjs-four-color, 
+  .gjs-block-label, 
+  .gjs-pn-btn {
+    color: #d4d4d4 !important;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .gjs-four-color-h:hover, 
+  .gjs-pn-btn.gjs-pn-active {
+    color: #569cd6 !important;
+  }
+
+  .gjs-cv-canvas {
+    background-color: #1e1e1e;
+  }
+
+  .gjs-three-bg {
+    background-color: #2d2d2d !important;
+  }
+  
+  .gjs-block {
+    background-color: #252526;
+    border: 1px solid #3c3c3c;
+    color: #d4d4d4;
+  }
+  
+  .gjs-block:hover {
+    border-color: #007acc;
+  }
+  
+  .gjs-pn-commands {
+    background-color: #2d2d2d;
+  }
+  
+  .gjs-fonts {
+    font-family: 'gjs-fonts' !important;
+  }
+  
+  .fa {
+    font-family: FontAwesome !important;
+  }
+  

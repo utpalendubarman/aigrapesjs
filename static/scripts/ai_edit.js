@@ -142,13 +142,10 @@ function pushJavascript(editor) {
 // UI Events
 function fix_ui_events(modal, editor) {
     const modalEl = document.querySelector('.gjs-mdl-container');
-
     const loaderText = document.getElementById('writer-loading-text');
-
     if (loaderText !== null) {
         let dots = 0;
         const maxDots = 3;
-
         setInterval(() => {
             dots = (dots + 1) % (maxDots + 1); 
             const dotStr = '.'.repeat(dots);
@@ -159,6 +156,19 @@ function fix_ui_events(modal, editor) {
     if (!modalEl) return;
     if (modalEl.getAttribute('data-listener') === 'true') return;
 
+    modalEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const inputField = modalEl.querySelector('#fix');
+          if (inputField && inputField.value.length > 0) {
+            document.getElementById('fix_btn').click();
+          }
+        }
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          modal.close();
+        }
+      });
 
     modalEl.addEventListener('click', (e) => {
         const target = e.target;

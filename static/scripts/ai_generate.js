@@ -30,7 +30,8 @@ function ai_generate(editor) {
   }
 
   .understanding-text {
-    height: auto;
+    height: 200px;
+    overflow-y: auto;
     border-radius: 12px;
     padding: 15px;
     font-family: sans-serif;
@@ -39,8 +40,9 @@ function ai_generate(editor) {
     line-height: 1.6;
     background-color: #292524;
     color: #cfcfcf;
-    width:98%;
+    width: 98%;
   }
+
   .action-holder {
     display: flex;
     flex-direction:column;
@@ -143,33 +145,18 @@ function ai_generate(editor) {
       })
 
       socket.on('complete_code', (data) => {
-        let hypertext = code
-                        .replace(/```html\n/, '')
-                        .replace(/```None\n?$/, '')
-                        .replace(/```$/, '')
-                        .trim();
-        
-        console.log(code);
-
         code=code.replaceAll('```html','')
         code=code.replaceAll('```','')
-
-
-        const matches = hypertext.match(/```([\s\S]*?)```/);
-        if (matches) {
-          raw=matches[0];
-          console.log(matches[0]); 
-        }
-        
-        
-
+        raw_code=code;
         const newCss = code.replace(/url\((['"]?)(.*?)\1\)/g, (match, quote, url) => {
           return `url(${quote}${set_image(color_scheme)}${quote})`;
         });
         
-        console.log(newCss);
-        
-        editor.addComponents(newCss);
+        if(newCss.length!=0){
+          editor.addComponents(newCss);
+        }else{
+          editor.addComponents(raw_code);
+        }
         pushJavascript(editor);
         modal.close()
       })
@@ -225,9 +212,9 @@ function ai_generate(editor) {
         summarisation += currentChunk.charAt(index);
         summarisation=summarisation.replace(/^[\s\S]*?(1\.)/, '1.');
         target.innerText = summarisation
-        index++;
         agent_response=summarisation
-        setTimeout(typeNext, 30);
+        setTimeout(typeNext, 10);
+        index++;
       } else {
         startTyping(onComplete);
       }
@@ -270,9 +257,25 @@ function start_thinking(modal){
 function start_writing(modal){
   dom_elements = `<style>.writing-holder{margin-top:40px;margin-bottom:40px;display:flex;justify-content:center;align-items:center;flex-direction:column}@keyframes loader_5191{from{opacity:0}to{opacity:1}}.square{background:#ddd;width:10px;height:10px;position:absolute;top:50%;left:50%;margin-top:-5px;margin-left:-5px}#sq1{margin-top:-25px;margin-left:-25px;animation:loader_5191 675ms ease-in-out 0s infinite alternate}#sq2{margin-top:-25px;animation:loader_5191 675ms ease-in-out 75ms infinite alternate}#sq3{margin-top:-25px;margin-left:15px;animation:loader_5191 675ms ease-in-out 150ms infinite}#sq4{margin-left:-25px;animation:loader_5191 675ms ease-in-out 225ms infinite}#sq5{animation:loader_5191 675ms ease-in-out 300ms infinite}#sq6{margin-left:15px;animation:loader_5191 675ms ease-in-out 375ms infinite}#sq7{margin-top:15px;margin-left:-25px;animation:loader_5191 675ms ease-in-out 450ms infinite}#sq8{margin-top:15px;animation:loader_5191 675ms ease-in-out 525ms infinite}#sq9{margin-top:15px;margin-left:15px;animation:loader_5191 675ms ease-in-out 600ms infinite}</style><div class="writing-holder"><div class="loader" style="margin-bottom:120px"><div class="square" id="sq1"></div><div class="square" id="sq2"></div><div class="square" id="sq3"></div><div class="square" id="sq4"></div><div class="square" id="sq5"></div><div class="square" id="sq6"></div><div class="square" id="sq7"></div><div class="square" id="sq8"></div><div class="square" id="sq9"></div></div><h3 id="writer-loading-text" style="color:#ffffff;font-family: sans-serif;">Analysing requirement</h3></div>`;
   modal.setContent(dom_elements);
+  observeUnderstandingText();
   loader_text = document.getElementById('writer-loading-text')
   ui_events(modal)
 }
+
+// Auto Scroll Down to suggesion box
+function observeUnderstandingText() {
+  const targetEl = document.querySelector('.understanding-text');
+  if (!targetEl) return;
+  const observer = new MutationObserver(() => {
+    targetEl.scrollTop = targetEl.scrollHeight;
+  });
+  observer.observe(targetEl, {
+    childList: true,
+    characterData: true,
+    subtree: true
+  });
+}
+
 
 
 
@@ -303,6 +306,21 @@ function ui_events(modal) {
       color_scheme=target.value
     }
   })
+
+  //Key press
+  modalEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const inputField = modalEl.querySelector('#prompt');
+      if (inputField && inputField.value.length > 0) {
+        document.getElementById('generate').click();
+      }
+    }
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      modal.close();
+    }
+  });
 
   modalEl.addEventListener('click', (e) => {
     const target = e.target;

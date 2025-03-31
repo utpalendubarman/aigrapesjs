@@ -8,16 +8,26 @@
       rel="stylesheet"
       href="/static/node_modules/grapesjs/dist/css/grapes.min.css"
     />
-    <link
-      href="https://unpkg.com/grapesjs@0.22.5/dist/css/grapes.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="/static/node_modules/grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.css"
-    />
     <link rel="stylesheet" href="/static/themes/base.css" />
     <link rel="stylesheet" href="/static/themes/studio.css" />
+    <style>
+      .change-theme-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.change-theme-button:focus {
+  /* background-color: yellow; */
+  outline: none;
+  box-shadow: 0 0 0 2pt #c5c5c575;
+}
+.gjs-block-label svg {
+  width: 100px !important;
+  height: 100px !important;
+}
+    </style>
   </head>
   <body>
     <div id="gjs"></div>
@@ -28,35 +38,26 @@
     <script src="/static/scripts/set_image.js"></script>
     <script src="/static/node_modules/grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.js"></script>
     <script src="https://unpkg.com/grapesjs-navbar@1.0.2/dist/index.js"></script>
+    <script src="https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js"></script>
+    <script src="https://unpkg.com/grapesjs-preset-webpage@1.0.3/dist/index.js"></script>
+    <script src="/static/node_modules/grapesjs-plugin-forms/dist/index.js"></script>
+    <script src="/static/node_modules/grapesjs-tailwind/dist/grapesjs-tailwind.min.js"></script>
     <script src="/static/scripts/components.js"></script>
     <script src="/static/scripts/ai_generate.js"></script>
     <script src="/static/scripts/ai_edit.js"></script>
     <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
     <script>
       window.onload = function () {
+        const escapeName = (name) => `${name}`.trim().replace(/([^a-z0-9\w-:/]+)/gi, '-');
         var editor = grapesjs.init({
           container: "#gjs",
           height: "100%",
           fromElement: false,
           noticeOnUnload: false,
           storageManager: false,
-          plugins: ["gjs-preset-webpage", "grapesjs-navbar"],
-          pluginsOpts: {
-            "gjs-preset-webpage": {
-              blocksBasicOpts: { flexGrid: true },
-              navbarOpts: false,
-              countdownOpts: false,
-              formsOpts: false,
-            },
-            "grapesjs-navbar": {
-              blocksBasicOpts: { flexGrid: true },
-              navbarOpts: false,
-              countdownOpts: false,
-              formsOpts: false,
-            },
-          },
+          selectorManager: { escapeName },
+          plugins: ['grapesjs-tailwind']
         });
-
         ai_edit(editor);
         ai_generate(editor);
         importComponents(editor);

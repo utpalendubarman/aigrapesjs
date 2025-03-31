@@ -5,7 +5,7 @@ This project provides an interactive interface for visually coding web pages wit
 
 ---
 
-<p style="color:red;"><strong>Note:</strong> This project is a part of the "AI Integration in GrapesJs Website Builder" assessment containing only MVP.</p>
+<p style="color:red;"><strong>Note:</strong> This project is a part of the "AI Integration in GrapesJs Website Builder" assessment containing only MVP for Fleapo.</p>
 
 ## 🚀 Features
 

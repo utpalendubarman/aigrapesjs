@@ -5,6 +5,8 @@ This project provides an interactive interface for visually coding web pages wit
 
 ---
 
+<p style="color:red;"><strong>Note:</strong> This project is a part of the "AI Integration in GrapesJs Website Builder" assessment containing only MVP.</p>
+
 ## 🚀 Features
 
 - 🤖 AI Agent (Website Generation / Website Modification)
@@ -36,12 +38,15 @@ This project provides an interactive interface for visually coding web pages wit
 ---
 
 
-## ⚙️ Installation & Setup
+## ⚙️ Installation & Setup Options
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/utpalendubarman/aigrapesjs.git
 cd aigrapesjs
-pip install -r requirements.py
+pip install -r requirements.txt
+mv .env.example .env # Add OpenAI API Key
 python app.py
+```
+#### * Must consider to cinfigure web socket if hosting in a cloud server

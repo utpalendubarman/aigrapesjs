@@ -4,7 +4,6 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from flask_socketio import SocketIO, emit
 from flask import Flask, render_template_string
-
 from lib.boilerplate_code import boilerplate_code
 load_dotenv()
 app = Flask(__name__)

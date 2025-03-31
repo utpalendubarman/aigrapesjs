@@ -11,8 +11,8 @@ function ai_generate(editor) {
   let summarisation = '';
   editor.Panels.addButton('options', [{
     id: 'custom-button',
-    className: 'fa fa-terminal',  // You can use FontAwesome or any class
-    command: 'open-custom-modal', // Command to execute
+    className: 'fa fa-terminal',  
+    command: 'open-custom-modal', 
     attributes: { title: 'Open Custom Popup' },
   }]);
 
@@ -178,7 +178,7 @@ function ai_generate(editor) {
   editor.on('load', () => {
     const button = editor.Panels.getButton('options', 'custom-button');
     if (button) {
-      button.set('active', true); // Triggers the command & visually shows active state
+      button.set('active', true); 
     }
   });
   

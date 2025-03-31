@@ -1,12 +1,11 @@
 let socket;
-let stage="prompt"  // ["prompt","adjustment"]
+let stage="prompt"  // Options : ["prompt","adjustment"]
 let agent_response=""
 let init_prompt=""
 let language="English"
 let color_scheme="auto"
 let code=""
-function ai_generate(editor) {
-  // 1. Add a custom editor
+function ai_creator(editor) {
   const modal = editor.Modal;
   let summarisation = '';
   editor.Panels.addButton('options', [{
@@ -211,13 +210,19 @@ function ai_generate(editor) {
       if (index < currentChunk.length) {
         summarisation += currentChunk.charAt(index);
         summarisation=summarisation.replace(/^[\s\S]*?(1\.)/, '1.');
-        target.innerText = summarisation
+        target.innerHTML = formatSummaryText(summarisation)
         agent_response=summarisation
         setTimeout(typeNext, 10);
         index++;
       } else {
         startTyping(onComplete);
       }
+    }
+
+    function formatSummaryText(text) {
+      return text
+        .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+        .replace(/\n/g, '<br>');
     }
     
     typeNext();

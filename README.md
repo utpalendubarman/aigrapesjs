@@ -48,7 +48,8 @@ changing the
 git clone https://github.com/utpalendubarman/aigrapesjs.git
 cd aigrapesjs
 pip install -r requirements.txt
-mv .env.example .env # Add OpenAI API Key
+mv .env.example .env 
+# Set your OpenAI API key in .env
 python app.py
 ```
 #### * Must consider to cinfigure web socket if hosting in a cloud server

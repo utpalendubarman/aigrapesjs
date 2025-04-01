@@ -1,4 +1,4 @@
-function ai_edit(editor) {
+function ai_editor(editor) {
     editor.on('component:selected', (component) => {
         if (!component) return;
         const toolbar = component.get('toolbar') || [];

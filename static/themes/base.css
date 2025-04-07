@@ -101,3 +101,10 @@ html {
     width: 100px !important;
     height: 100px !important;
 }
+
+.gjs-sm-property{
+    width:100%;
+}
+.gjs-field {
+    width: 100%;
+}

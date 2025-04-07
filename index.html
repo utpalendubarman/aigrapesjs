@@ -14,7 +14,12 @@
   <body>
     <div id="gjs"></div>
     <script src="/static/node_modules/grapesjs/dist/grapes.min.js"></script>
+    <script src="https://unpkg.com/@grapesjs/studio-sdk/dist/index.umd.js"></script>
     <script src="/static/script.js"></script>
+    <script src="/static/scripts/component_config.js"></script>
+    
+    <script src="/static/scripts/component_loader.js"></script>
+    
     <script src="/static/config.js"></script>
     <script src="/static/scripts/set_image.js"></script>
     <script src="/static/node_modules/grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.js"></script>
@@ -26,7 +31,9 @@
     <script src="/static/node_modules/socket.io/client-dist/socket.io.min.js"></script>
     <script>
       window.onload = function () {
-        const escapeName = (name) => `${name}`.trim().replace(/([^a-z0-9\w-:/]+)/gi, '-');
+        const escapeName = (name) =>
+          `${name}`.trim().replace(/([^a-z0-9\w-:/]+)/gi, "-");
+        
         var editor = grapesjs.init({
           container: "#gjs",
           height: "100%",
@@ -34,8 +41,9 @@
           noticeOnUnload: false,
           storageManager: false,
           selectorManager: { escapeName },
-          plugins: ['grapesjs-tailwind']
+          plugins: ["grapesjs-tailwind"],
         });
+        component_loader(editor);
         ai_creator(editor);
         ai_editor(editor);
       };

@@ -1,426 +1,308 @@
 default_html=`
-<style>
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-}
-*{
-  box-sizing:border-box;
-  margin-top:0px;
-  margin-right:0px;
-  margin-bottom:0px;
-  margin-left:0px;
-  padding-top:0px;
-  padding-right:0px;
-  padding-bottom:0px;
-  padding-left:0px;
-}
-.navbar{
-  padding-top:10px;
-  padding-right:15px;
-  padding-bottom:10px;
-  padding-left:15px;
-}
-.navbar-container{
-  display:block;
-  justify-content:space-between;
-  align-items:center;
-  max-width:950px;
-  flex-direction:column;
-  margin-top:0px;
-  margin-right:auto;
-  margin-bottom:0px;
-  margin-left:auto;
-}
-.nav-holder{
-  display:flex;
-  flex-direction:row;
-  justify-content:space-between;
-}
-.navbar-brand{
-  color:inherit;
-  text-decoration-line:none;
-  text-decoration-thickness:initial;
-  text-decoration-style:initial;
-  text-decoration-color:initial;
-  font-weight:bold;
-}
-.navbar-menu-link{
-  color:inherit;
-  text-decoration-line:none;
-  text-decoration-thickness:initial;
-  text-decoration-style:initial;
-  text-decoration-color:initial;
-  padding-top:5px;
-  padding-right:10px;
-  padding-bottom:5px;
-  padding-left:10px;
-}
-.navbar-burger{
-  display:none;
-  flex-direction:column;
-  row-gap:4px;
-  column-gap:4px;
-  cursor:pointer;
-}
-.navbar-burger-line{
-  width:25px;
-  height:2px;
-}
-.navbar-items-c{
-  display:block;
-  width:100%;
-}
-.navbar-menu{
-  display:flex;
-  row-gap:10px;
-  column-gap:10px;
-}
-.hero{
-  background-image:url("wedding-hero.jpg");
-  height:100vh;
-  background-size:cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:white;
-}
-.hero h1{
-  font-size:3em;
-  margin-bottom:20px;
-}
-.hero button{
-  padding-top:10px;
-  padding-right:20px;
-  padding-bottom:10px;
-  padding-left:20px;
-  font-size:1em;
-  background-color:rgb(255, 64, 129);
-  border-top-width:initial;
-  border-right-width:initial;
-  border-bottom-width:initial;
-  border-left-width:initial;
-  border-top-style:none;
-  border-right-style:none;
-  border-bottom-style:none;
-  border-left-style:none;
-  border-top-color:initial;
-  border-right-color:initial;
-  border-bottom-color:initial;
-  border-left-color:initial;
-  border-image-source:initial;
-  border-image-slice:initial;
-  border-image-width:initial;
-  border-image-outset:initial;
-  border-image-repeat:initial;
-  color:white;
-  cursor:pointer;
-}
-.about{
-  max-width:800px;
-  margin-top:50px;
-  margin-right:auto;
-  margin-bottom:50px;
-  margin-left:auto;
-  padding-top:20px;
-  padding-right:20px;
-  padding-bottom:20px;
-  padding-left:20px;
-  border-top-width:1px;
-  border-right-width:1px;
-  border-bottom-width:1px;
-  border-left-width:1px;
-  border-top-style:solid;
-  border-right-style:solid;
-  border-bottom-style:solid;
-  border-left-style:solid;
-  border-top-color:rgb(221, 221, 221);
-  border-right-color:rgb(221, 221, 221);
-  border-bottom-color:rgb(221, 221, 221);
-  border-left-color:rgb(221, 221, 221);
-  border-image-source:initial;
-  border-image-slice:initial;
-  border-image-width:initial;
-  border-image-outset:initial;
-  border-image-repeat:initial;
-  border-top-left-radius:8px;
-  border-top-right-radius:8px;
-  border-bottom-right-radius:8px;
-  border-bottom-left-radius:8px;
-}
-.services{
-  max-width:800px;
-  margin-top:50px;
-  margin-right:auto;
-  margin-bottom:50px;
-  margin-left:auto;
-  padding-top:20px;
-  padding-right:20px;
-  padding-bottom:20px;
-  padding-left:20px;
-  border-top-width:1px;
-  border-right-width:1px;
-  border-bottom-width:1px;
-  border-left-width:1px;
-  border-top-style:solid;
-  border-right-style:solid;
-  border-bottom-style:solid;
-  border-left-style:solid;
-  border-top-color:rgb(221, 221, 221);
-  border-right-color:rgb(221, 221, 221);
-  border-bottom-color:rgb(221, 221, 221);
-  border-left-color:rgb(221, 221, 221);
-  border-image-source:initial;
-  border-image-slice:initial;
-  border-image-width:initial;
-  border-image-outset:initial;
-  border-image-repeat:initial;
-  border-top-left-radius:8px;
-  border-top-right-radius:8px;
-  border-bottom-right-radius:8px;
-  border-bottom-left-radius:8px;
-}
-.testimonials{
-  max-width:800px;
-  margin-top:50px;
-  margin-right:auto;
-  margin-bottom:50px;
-  margin-left:auto;
-  padding-top:20px;
-  padding-right:20px;
-  padding-bottom:20px;
-  padding-left:20px;
-  border-top-width:1px;
-  border-right-width:1px;
-  border-bottom-width:1px;
-  border-left-width:1px;
-  border-top-style:solid;
-  border-right-style:solid;
-  border-bottom-style:solid;
-  border-left-style:solid;
-  border-top-color:rgb(221, 221, 221);
-  border-right-color:rgb(221, 221, 221);
-  border-bottom-color:rgb(221, 221, 221);
-  border-left-color:rgb(221, 221, 221);
-  border-image-source:initial;
-  border-image-slice:initial;
-  border-image-width:initial;
-  border-image-outset:initial;
-  border-image-repeat:initial;
-  border-top-left-radius:8px;
-  border-top-right-radius:8px;
-  border-bottom-right-radius:8px;
-  border-bottom-left-radius:8px;
-}
-.contact{
-  max-width:800px;
-  margin-top:50px;
-  margin-right:auto;
-  margin-bottom:50px;
-  margin-left:auto;
-  padding-top:20px;
-  padding-right:20px;
-  padding-bottom:20px;
-  padding-left:20px;
-  border-top-width:1px;
-  border-right-width:1px;
-  border-bottom-width:1px;
-  border-left-width:1px;
-  border-top-style:solid;
-  border-right-style:solid;
-  border-bottom-style:solid;
-  border-left-style:solid;
-  border-top-color:rgb(221, 221, 221);
-  border-right-color:rgb(221, 221, 221);
-  border-bottom-color:rgb(221, 221, 221);
-  border-left-color:rgb(221, 221, 221);
-  border-image-source:initial;
-  border-image-slice:initial;
-  border-image-width:initial;
-  border-image-outset:initial;
-  border-image-repeat:initial;
-  border-top-left-radius:8px;
-  border-top-right-radius:8px;
-  border-bottom-right-radius:8px;
-  border-bottom-left-radius:8px;
-}
-.services ul{
-  list-style-type:none;
-}
-.services li{
-  margin-top:10px;
-  margin-right:0px;
-  margin-bottom:10px;
-  margin-left:0px;
-}
-.testimonials blockquote{
-  font-style:italic;
-  margin-top:10px;
-  margin-right:0px;
-  margin-bottom:10px;
-  margin-left:0px;
-}
-.contact form{
-  display:flex;
-  flex-direction:column;
-}
-.contact input, .contact textarea{
-  margin-top:10px;
-  margin-right:0px;
-  margin-bottom:10px;
-  margin-left:0px;
-  padding-top:10px;
-  padding-right:10px;
-  padding-bottom:10px;
-  padding-left:10px;
-  border-top-width:1px;
-  border-right-width:1px;
-  border-bottom-width:1px;
-  border-left-width:1px;
-  border-top-style:solid;
-  border-right-style:solid;
-  border-bottom-style:solid;
-  border-left-style:solid;
-  border-top-color:rgb(221, 221, 221);
-  border-right-color:rgb(221, 221, 221);
-  border-bottom-color:rgb(221, 221, 221);
-  border-left-color:rgb(221, 221, 221);
-  border-image-source:initial;
-  border-image-slice:initial;
-  border-image-width:initial;
-  border-image-outset:initial;
-  border-image-repeat:initial;
-  border-top-left-radius:4px;
-  border-top-right-radius:4px;
-  border-bottom-right-radius:4px;
-  border-bottom-left-radius:4px;
-}
-.contact button{
-  padding-top:10px;
-  padding-right:10px;
-  padding-bottom:10px;
-  padding-left:10px;
-  background-color:rgb(255, 64, 129);
-  border-top-width:initial;
-  border-right-width:initial;
-  border-bottom-width:initial;
-  border-left-width:initial;
-  border-top-style:none;
-  border-right-style:none;
-  border-bottom-style:none;
-  border-left-style:none;
-  border-top-color:initial;
-  border-right-color:initial;
-  border-bottom-color:initial;
-  border-left-color:initial;
-  border-image-source:initial;
-  border-image-slice:initial;
-  border-image-width:initial;
-  border-image-outset:initial;
-  border-image-repeat:initial;
-  color:white;
-  cursor:pointer;
-}
-@media (max-width: 768px){
-  .navbar-burger{
-    display:flex;
-  }
-  .navbar-items-c{
-    display:none;
-    width:100%;
-  }
-  .navbar-menu{
-    flex-direction:column;
-    width:100%;
-    padding-top:10px;
-    padding-right:0px;
-    padding-bottom:10px;
-    padding-left:0px;
-  }
-  .navbar-menu-link{
-    display:block;
-  }
-}
-
-</style>
-<body id="i0yc">
-  <div id="i8vg">
-  </div>
-  <meta charset="UTF-8"/>
-  <title>Minimal Navbar
-  </title>
-  <div class="navbar">
-    <div data-gjs="navbar" class="navbar-container">
-      <div class="nav-holder">
-        <a href="/" class="navbar-brand">MyBrand</a>
-        <div id="igbjv" class="navbar-burger">
-          <div class="navbar-burger-line">
-          </div>
-          <div class="navbar-burger-line">
-          </div>
-          <div class="navbar-burger-line">
-          </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Sprouts Nursery School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f7f2;
+            color: #333;
+        }
+        
+        .navbar-container {
+            display: flex;
+            padding: 15px 20px;
+            background-color: #8bc34a;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-holder {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .navbar-burger {
+            display: none;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        
+        .navbar-burger-line {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+        }
+        
+        .navbar-items-c {
+            margin-left: auto;
+        }
+        
+        .navbar-menu {
+            display: flex;
+        }
+        
+        .navbar-menu-link {
+            color: white;
+            padding: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80') center/cover;
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(76, 175, 80, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .hero-button {
+            padding: 12px 30px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .hero-button:hover {
+            background-color: #f57c00;
+            transform: scale(1.05);
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #4caf50;
+        }
+        
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .service-card {
+            flex: 1 1 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .testimonials {
+            background-color: #e8f5e9;
+        }
+        
+        .carousel {
+            display: flex;
+            overflow-x: hidden;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .testimonial-item {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .accordian {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-burger {
+                display: block;
+            }
+            
+            .navbar-items-c {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div data-gjs="navbar" class="navbar-container">
+            <div class="nav-holder" style="flex:1">
+                <a href="/" class="navbar-brand">Little Sprouts</a>
+                <div id="igbjv" class="navbar-burger">
+                    <div class="navbar-burger-line"></div>
+                    <div class="navbar-burger-line"></div>
+                    <div class="navbar-burger-line"></div>
+                </div>
+            </div>
+            <div data-gjs="navbar-items" class="navbar-items-c">
+                <nav class="navbar-menu">
+                    <a href="#" class="navbar-menu-link">Home</a>
+                    <a href="#about" class="navbar-menu-link">About Us</a>
+                    <a href="#programs" class="navbar-menu-link">Programs</a>
+                    <a href="#testimonials" class="navbar-menu-link">Testimonials</a>
+                    <a href="#contact" class="navbar-menu-link">Contact</a>
+                </nav>
+            </div>
         </div>
-      </div>
-      <div data-gjs="navbar-items" class="navbar-items-c">
-        <nav class="navbar-menu">
-          <a href="#" class="navbar-menu-link">Home</a>
-          <a href="#" class="navbar-menu-link">About</a>
-          <a href="#" class="navbar-menu-link">Contact</a>
-        </nav>
-      </div>
     </div>
-  </div>
-  <div class="hero">
-    <h1>Plan Your Dream Wedding
-    </h1>
-    <button>Start Planning</button>
-  </div>
-  <div class="about">
-    <h2>About Us
-    </h2>
-    <p>We are a dedicated wedding planning service with years of experience, committed to making your special day unforgettable.
-    </p>
-  </div>
-  <div class="services">
-    <h2>Services Offered
-    </h2>
-    <ul>
-      <li>
-        <strong>Venue Selection:</strong> We help you find the perfect location for your wedding.
-      </li>
-      <li>
-        <strong>Catering:</strong> Enjoy a variety of menu options tailored to your taste.
-      </li>
-      <li>
-        <strong>Decoration:</strong> Beautiful setups that reflect your style and theme.
-      </li>
-    </ul>
-  </div>
-  <div class="testimonials">
-    <h2>Testimonials
-    </h2>
-    <blockquote>"The best wedding planning service! They made our day perfect!" - Jane D.
-    </blockquote>
-    <blockquote>"Highly recommend! Professional and attentive to every detail." - John S.
-    </blockquote>
-  </div>
-  <div class="contact">
-    <h2>Contact Us
-    </h2>
-    <form>
-      <input type="text" placeholder="Your Name" required/>
-      <input type="email" placeholder="Your Email" required/>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
-  <div class="footer">
-  </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Growing Curious Minds</h1>
+            <p class="hero-subtitle">A nurturing environment where every child can learn, play, and thrive</p>
+            <button class="hero-button">Enroll Now</button>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">About Little Sprouts</h2>
+        <div class="about-content">
+            <p>Little Sprouts is a premier nursery school dedicated to providing a safe, loving, and stimulating environment for children. Our mission is to nurture each child's unique potential through play-based learning and creative exploration.</p>
+            <div class="timer" data-countdown="2023/12/25">
+                <span>Enrolling for next term!</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs" class="section">
+        <h2 class="section-title">Our Programs</h2>
+        <div class="services">
+            <div class="service-card">
+                <h3>Toddler Program</h3>
+                <p>For children ages 1-2, focusing on sensory exploration and language development.</p>
+            </div>
+            <div class="service-card">
+                <h3>Preschool Program</h3>
+                <p>For ages 3-4, building social skills and introducing early literacy and numeracy concepts.</p>
+            </div>
+            <div class="service-card">
+                <h3>Pre-K Program</h3>
+                <p>For ages 4-5, preparing children for kindergarten through comprehensive learning experiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials">
+        <h2 class="section-title">What Parents Say</h2>
+        <div class="carousel">
+            <div class="testimonial-item">
+                <p>"Little Sprouts has been a second home for our daughter. The teachers are caring and the curriculum is engaging!"</p>
+                <p><strong>- Sarah Johnson, Parent</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="accordian">
+            <div class="accordian-item">
+                <h3>What are your operating hours?</h3>
+                <div>We are open Monday through Friday, 7:30 AM to 6:00 PM.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-form">
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button class="hero-button" type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Little Sprouts Nursery School. All Rights Reserved.</p>
+    </footer>
 </body>
-`;
+</html>`;
 

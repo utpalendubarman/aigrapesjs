@@ -146,10 +146,31 @@ function fix_ui_events(modal, editor) {
     if (loaderText !== null) {
         let dots = 0;
         const maxDots = 3;
+        //70 component adding
+        // 116 code done
+
+        a=1;
         setInterval(() => {
+            let label = "";
+            if (a < 10) {
+                label = "Analysing Requirements";
+            } else if (a < 20) {
+                label = "Thinking";
+            } else if (a < 30) {
+            label = "Drawing Layouts";
+            } else if (a < 40) {
+                label = "Generating Components";
+            } else if (a < 66) {
+                label = "Styling Components";
+            } else if (a < 100) {
+                label = "Compiling Components";
+            } else {
+                label = "Finalising Code";
+            }
             dots = (dots + 1) % (maxDots + 1); 
             const dotStr = '.'.repeat(dots);
-            loaderText.innerHTML = `Generating code ${dotStr}`;
+            loaderText.innerHTML = `${label} ${dotStr}`;
+            a++;
         }, 500); 
     }
 

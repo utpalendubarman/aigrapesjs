@@ -51,5 +51,3 @@ mv .env.example .env
 python app.py
 ```
 #### * Must consider to configure web socket if hosting in a cloud server
-
-

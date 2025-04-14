@@ -80,7 +80,7 @@ def v2_apis(socketio):
             except Exception as e:
                 socketio.emit('error', {'error': str(e)})
             
-        socketio.emit('v2/complete_code', {'content': hypertext})
+        socketio.emit('v2/complete_code', {'content': hypertext,'sections':sections})
         #socketio.emit('v2/complete_code', {'content': template,'sections': sections})
         
             

@@ -1,5 +1,6 @@
 // Root Adapter
-const component_loader = (editor) => {
+const component_loader = (editor,sections) => {
+    console.log(sections)
     editor.on("selector:custom", (props) => {
       classes = props.selected.map((el) => {
         return el.attributes.name;
@@ -160,7 +161,7 @@ const component_loader = (editor) => {
         sm.getSectors().add(HeroBackground, { at: 0 });
       } else {
         //sm.removeSector("hero-id");
-        sm.getSector("hero-id").set("visible", false);
+        //sm.getSector("hero-id").set("visible", false);
       }
 
     });

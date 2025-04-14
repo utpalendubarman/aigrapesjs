@@ -126,7 +126,7 @@ function ai_creator(editor) {
       started = false
       socket.on('understandings', (data) => {
         if (data.response != "None") {
-          renderUnderstandings(data.response)
+          renderUnderstandings(data.response,modal)
         }
       });
 
@@ -139,8 +139,10 @@ function ai_creator(editor) {
 
 
       nd = 1;
+      style=''
       socket.on('v2/code', (data) => {
         message = data.content;
+        style+= data.css;
         code += message;
         nd += 1;
 
@@ -151,31 +153,45 @@ function ai_creator(editor) {
 
         if (nd % 10 === 0) {
           editor.DomComponents.clear();
-          code = code.replaceAll('```html', '').replaceAll('```', '');
+          code = code.replaceAll('```html', '')
+          code=code.replaceAll('```', '');
+          code=code.replaceAll('html','')
           //component_config(editor);
+
           editor.addComponents(code);
+          editor.addStyle(style);
           pushJavascript(editor);
         }
       });
 
-      console.log(code)
 
       socket.on('v2/complete_code', (data) => {
-        console.log(data)
         editor.DomComponents.clear();
+        sections=data.sections
         code = code.replaceAll('```html', '')
         code = code.replaceAll('```', '')
-        console.log(code)
-        //component_config(editor);
+        code = code.replaceAll('html','')
+        code = code.replaceAll('https://via.placeholder.com/', 'https://placehold.co/')
+        
+        
+        temp=[{"section":"hero"},{"section":"about"},{"section":"footer"}]
+        register_components(editor,sections);
+        curr=custom_components(editor,sections);
+        
+        
+
         editor.addComponents(code);
+        
+
         jsSnippets=extractJs(code);
-        console.log('Extracted JS:', jsSnippets);
         extractJs(code).forEach(script => {
           //console.log(script)
         })
         
         pushJavascript(editor);
+        //component_loader(editor,sections);
         
+        console.log(curr)
         modal.close()
       })
 
@@ -198,16 +214,37 @@ function ai_creator(editor) {
   let typing = false;
   let typingEndCallback = null;
 
-  function renderUnderstandings(res) {
-    queue.push(res);
+  function renderUnderstandings(res,modal) {
+    res=res.replaceAll("```json", "")
+    res=res.replaceAll("```", "")
+    res=JSON.parse(res)
+    /*queue.push(res);
     if (!typing) {
       startTyping(() => {
         if (typingEndCallback) typingEndCallback();
         queue = [res]
         summarisation = ''
       });
-
-    }
+    }*/
+    opts=``
+    middle_layer_added=false
+    res.forEach((item) => {
+      sectionName=item.section.toUpperCase();
+      sectionName=sectionName.replaceAll("-", " ")
+      isChecked = ""
+      mandatory_sections = ["hero","footer"]
+      if(mandatory_sections.includes(item.section)){
+        isChecked = "checked"
+      }else if(!middle_layer_added){
+        isChecked = "checked"
+        middle_layer_added=true
+      }
+      description = item.description.replaceAll("`", "")
+      description = item.description.replaceAll("'", "")
+      description = item.description.replaceAll('"', "")
+      opts += `<div style='font-family: monospace;text-align: justify;border-bottom: 1px solid #979797;margin-bottom: 15px;'><input type='checkbox' class='plan-section' description='${description}' id='${item.section}' ${isChecked}/> <label class='plan-section-label' for='${item.section}'><span class="plan-section-description"><b style='font-weight:600'>${sectionName}</b> ${item.description}<span></label></div></hr>`;
+    })
+    modal.setContent(understandings(opts))
     document.getElementById("lang").value = language
     document.getElementById("colorMode").value = color_scheme
   }
@@ -319,16 +356,16 @@ function ui_events(modal) {
     setInterval(() => {
       let label = "";
       if (a < 10) {
-          label = "Analysing Requirements";
-      } else if (a < 20) {
-          label = "Thinking";
+          label = "Writing Code";
       } else if (a < 30) {
-      label = "Drawing Layouts";
+          label = "Writing Code";
       } else if (a < 40) {
+      label = "Drawing Layouts";
+      } else if (a < 80) {
           label = "Generating Components";
-      } else if (a < 66) {
-          label = "Styling Components";
       } else if (a < 100) {
+          label = "Styling Components";
+      } else if (a < 150) {
           label = "Compiling Components";
       } else {
           label = "Finalising Code";
@@ -368,34 +405,51 @@ function ui_events(modal) {
     }
   });
 
+  var is_coding = false
+  sections_=[]
   modalEl.addEventListener('click', (e) => {
-    const target = e.target;
-    if (target.id === 'approve') {
-      if (!target.classList.contains('clicked')) {
-        target.classList.add('clicked');
-        target.setAttribute('disabled', 'true');
-        target.style.backgroundColor = '#565656';
-        approvePlan(modal);
-      }
-    }
-    if (target.id === 'generate') {
-      prompt_field = document.getElementById('prompt').value;
-      if (prompt_field.length != 0) {
-        init_prompt = (init_prompt.length == 0) ? prompt_field : init_prompt;
-        socket.emit('analyse_requirement', { message: prompt_field, reference: agent_response });
-        if (stage == "prompt") {
-          start_thinking(modal);
-        } else {
-          document.querySelector('.action-loader').style.display = "flex";
-          document.querySelector('.action-holder').style.display = "none";
+      const target = e.target;
+      var clicking=false
+      if (target.id === 'approve' && target.classList.contains('approve-btn')) {
+        let sections = [];
+        let section_names = [];
+
+        let checks = document.querySelectorAll(".plan-section");
+        checks.forEach((check) => {
+          if (check.checked) {
+            section_names.push(check.id);
+            sections.push({
+              section: check.id,
+              description: check.getAttribute("description"),
+            });
+          }
+        });
+        
+        if(!arraysEqual(sections_,section_names)){
+          sections_=section_names
+          clicking=true
+          approvePlan(modal, target,sections);
         }
-        document.getElementById('prompt').value = "";
+        
       }
-      stage = "adjustment";
-    }
-    if (target.classList.contains('badge')) {
-      console.log('Suggestion badge clicked:', target.getAttribute('prompt'));
-    }
+      if (target.id === 'generate') {
+        prompt_field = document.getElementById('prompt').value;
+        if (prompt_field.length != 0) {
+          init_prompt = (init_prompt.length == 0) ? prompt_field : init_prompt;
+          socket.emit('analyse_requirement', { message: prompt_field, reference: agent_response });
+          if (stage == "prompt") {
+            start_thinking(modal);
+          } else {
+            document.querySelector('.action-loader').style.display = "flex";
+            document.querySelector('.action-holder').style.display = "none";
+          }
+          document.getElementById('prompt').value = "";
+        }
+        stage = "adjustment";
+      }
+      if (target.classList.contains('badge')) {
+        console.log('Suggestion badge clicked:', target.getAttribute('prompt'));
+      }
   });
 
   modalEl.setAttribute('data-listener', 'true');
@@ -450,23 +504,35 @@ function handleTypingAnimation(text, inputEl, speed = 20) {
   }, text.length * speed + 1000);
 }
 
-gen_count = 1;
-is_coding = false
-function approvePlan(modal) {
-  if (!is_coding) {
-    req = {
-      language, color: color_scheme, instruction: agent_response, command: init_prompt
+var gen_count = 1;
+
+function approvePlan(modal, target,sections) {
+  section_names = sections.map((sec) => sec.section);
+  console.log('Approve button clicked');
+    if (
+      sections.length > 0 &&
+      sections.length < 7 &&
+      section_names.includes("hero")
+    ) {
+      console.log(sections)
+      socket.emit('v2/sandbox', {command:init_prompt,sections});
+      gen_count++;
+    } else {
+      alert(
+        "Please select at least 1 and maximum 6 sections, and should contain Hero section"
+      );
     }
-    //start_writing(modal);
-    socket.emit('v2/generate', req);
-    //socket.emit('v2/sandbox', req);
-    console.log(req);
-    const approveBtn = document.getElementById('approve');
-    if (approveBtn) approveBtn.classList.remove('clicked');
-    is_coding = true
-    gen_count++;
-    console.log('gen count is ' + gen_count)
+  
+}
+
+
+function writeCode(req) {
+  if(req!=undefined){
+    socket.emit('v2/generate_code', req);
+    console.log(req.section)
+    return req;
   }
+  
 }
 
 function pushJavascript(editor) {

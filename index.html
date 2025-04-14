@@ -17,9 +17,7 @@
     <script src="https://unpkg.com/@grapesjs/studio-sdk/dist/index.umd.js"></script>
     <script src="/static/script.js"></script>
     <script src="/static/scripts/component_config.js"></script>
-    
     <script src="/static/scripts/component_loader.js"></script>
-    
     <script src="/static/config.js"></script>
     <script src="/static/scripts/set_image.js"></script>
     <script src="/static/node_modules/grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.js"></script>
@@ -28,8 +26,16 @@
     <script src="/static/scripts/components.js"></script>
     <script src="/static/scripts/ai_creator.js"></script>
     <script src="/static/scripts/ai_editor.js"></script>
+    <script src="/static/scripts/custom_components.js"></script>
     <script src="/static/node_modules/socket.io/client-dist/socket.io.min.js"></script>
     <script>
+      function arraysEqual(arr1, arr2) {
+        if (arr1.length !== arr2.length) return false;
+        const sorted1 = [...arr1].sort();
+        const sorted2 = [...arr2].sort();
+        return sorted1.every((val, index) => val === sorted2[index]);
+      }
+
       window.onload = function () {
         const escapeName = (name) =>
           `${name}`.trim().replace(/([^a-z0-9\w-:/]+)/gi, "-");
@@ -42,8 +48,12 @@
           storageManager: false,
           selectorManager: { escapeName },
           plugins: ["grapesjs-tailwind"],
+          canvas: {
+            styles: [
+              'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'
+            ]
+          }
         });
-        component_loader(editor);
         ai_creator(editor);
         ai_editor(editor);
       };

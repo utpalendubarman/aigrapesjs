@@ -108,3 +108,14 @@ html {
 .gjs-field {
     width: 100%;
 }
+
+input[type="checkbox" i]:hover{
+    cursor: pointer;
+}
+
+.plan-section-label{
+    font-size: 10px;  
+}
+.plan-section-description{
+    margin-top:0px;
+}

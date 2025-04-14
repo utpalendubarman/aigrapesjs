@@ -1,0 +1,22 @@
+json="""
+```json
+[
+  {
+    "section":"nav",
+    "description:"",
+  },
+  {
+    "section":"hero",
+    "description:"",
+  },
+  {
+    "section":"about",
+    "description:"",
+  },{},
+  {
+    "section":"footer",
+    "description:""
+  }
+]
+```
+"""

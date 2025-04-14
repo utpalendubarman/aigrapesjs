@@ -153,19 +153,23 @@ function fix_ui_events(modal, editor) {
         setInterval(() => {
             let label = "";
             if (a < 10) {
-                label = "Analysing Requirements";
+                label = "Coding Layouts";
             } else if (a < 20) {
-                label = "Thinking";
+                label = "Coding Layouts";
             } else if (a < 30) {
-            label = "Drawing Layouts";
+            label = "Formatting Layouts";
             } else if (a < 40) {
-                label = "Generating Components";
+                label = "Formatting Components";
             } else if (a < 66) {
-                label = "Styling Components";
+                label = "Adjustting Components";
             } else if (a < 100) {
                 label = "Compiling Components";
-            } else {
-                label = "Finalising Code";
+            }  else if (a < 150) {
+                label = "Compiling Components";
+            } else if (a < 200) {
+                label = "Compiling Components";
+            }else {
+                label = "Adjusting Margins";
             }
             dots = (dots + 1) % (maxDots + 1); 
             const dotStr = '.'.repeat(dots);

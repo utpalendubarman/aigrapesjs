@@ -157,7 +157,7 @@ function ai_creator(editor) {
           code=code.replaceAll('```', '');
           //code=code.replaceAll('html','')
           //component_config(editor);
-
+          code=code.replaceAll('< lang="en">',"")
           editor.addComponents(code);
           editor.addStyle(style);
           pushJavascript(editor);
@@ -171,6 +171,7 @@ function ai_creator(editor) {
         code = code.replaceAll('```html', '')
         code = code.replaceAll('```', '')
         code = code.replaceAll('html','')
+        code=code.replaceAll('< lang="en">',"")
         code = code.replaceAll('https://via.placeholder.com/', 'https://placehold.co/')
         
         
@@ -508,6 +509,8 @@ var gen_count = 1;
 
 function approvePlan(modal, target,sections) {
   section_names = sections.map((sec) => sec.section);
+  // disable target button
+  target.setAttribute('disabled',true);
   console.log('Approve button clicked');
     if (
       sections.length > 0 &&

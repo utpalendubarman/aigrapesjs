@@ -1,4 +1,16 @@
 function custom_components(editor, sections) {
+
+    editor.StyleManager.addProperty('decorations', {
+        property: 'background-color',
+        type: 'color',
+        defaults: 'transparent',
+        colorPicker: {
+          // Spectrum or custom picker config
+          default: 'hex',
+          preferredFormat: 'hex'
+        }
+      });
+
     const sm = editor.StyleManager;
 
     // Create all sectors once on init (hidden by default)
@@ -12,10 +24,11 @@ function custom_components(editor, sections) {
                 open: false,
                 visible: false,
                 properties: [
-                    { property: "margin-top", type: "integer", defaults: '0', units: ['px', 'em', 'rem'], unit: 'px' },
-                    { property: "margin-bottom", type: "integer", units: ['px', 'em', 'rem'] },
-                    { property: "margin-left", type: "integer", units: ['px', 'em', 'rem'] },
-                    { property: "margin-right", type: "integer", units: ['px', 'em', 'rem'] }
+                    { 
+                        property: "background-color", 
+                        type: "color", 
+                        name: "Background Color" 
+                    }
                 ],
                 set:0
             });
@@ -55,7 +68,7 @@ function custom_components(editor, sections) {
             // OPTIONAL: Sync computed style into model (to display in SM)
             const el = model.getEl();
             const computed = window.getComputedStyle(el);
-            const margins = ['margin-top', 'margin-bottom', 'margin-left', 'margin-right'];
+            const margins = ['background-color'];
             const styles = {};
             margins.forEach(prop => {
                 const value = computed.getPropertyValue(prop);
@@ -162,6 +175,45 @@ function register_components(editor, sections) {
             }
         });
     });
+
+    // CTA Button
+    editor.DomComponents.addType('cta-button', {
+        isComponent: (el) => {
+            // Check if element is a div (or button, optionally), and class includes 'btn'
+            if (['DIV', 'BUTTON', 'A'].includes(el.tagName) && [...el.classList].some(cls => cls.includes('btn'))){
+                return { type: 'cta-button' };
+            }
+            return false;
+        },
+        model: {
+            defaults: {
+                name: 'CTA Button',
+                tagName: 'div',
+                classes: ['btn-cta'],
+                draggable: true,
+                droppable: false,
+                editable: true,
+                traits: [
+                    {
+                        type: 'text',
+                        name: 'cta-label',
+                        label: 'Button Label',
+                        placeholder: 'Enter CTA text',
+                        changeProp: 1
+                    },
+                    // Dummy trait
+                    {
+                        type: 'text',
+                        name: 'dummy-prop',
+                        label: 'Redirection URL',
+                        placeholder: 'Enter URL'
+                    }
+                ],
+                selectable: true
+            }
+        }
+    });
+    
 }
 
 

@@ -155,7 +155,7 @@ function ai_creator(editor) {
           editor.DomComponents.clear();
           code = code.replaceAll('```html', '')
           code=code.replaceAll('```', '');
-          code=code.replaceAll('html','')
+          //code=code.replaceAll('html','')
           //component_config(editor);
 
           editor.addComponents(code);

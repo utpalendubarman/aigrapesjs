@@ -104,8 +104,6 @@ function ai_creator(editor) {
 </div>`+ prompt_input
   }
 
-
-
   editor.Commands.add('open-custom-modal', {
     run(editor, sender) {
       sender.set('active');
@@ -208,9 +206,7 @@ function ai_creator(editor) {
     }
   });
 
-
   let loading_finished = false;
-
   let queue = [];
   let typing = false;
   let typingEndCallback = null;
@@ -342,9 +338,6 @@ function observeUnderstandingText() {
   });
 }
 
-
-
-
 // UI Events
 function ui_events(modal) {
   const modalEl = document.querySelector('.gjs-mdl-container');
@@ -361,7 +354,7 @@ function ui_events(modal) {
       } else if (a < 30) {
           label = "Writing Code";
       } else if (a < 40) {
-      label = "Drawing Layouts";
+          label = "Drawing Layouts";
       } else if (a < 80) {
           label = "Generating Components";
       } else if (a < 100) {
@@ -369,12 +362,12 @@ function ui_events(modal) {
       } else if (a < 150) {
           label = "Compiling Components";
       } else {
-          label = "Finalising Code";
+          label = "Finalizing Code";
       }
-        dots = (dots + 1) % (maxDots + 1); 
-        const dotStr = '.'.repeat(dots);
-        loaderText.innerHTML = `${label} ${dotStr}`;
-        a++;
+      dots = (dots + 1) % (maxDots + 1); 
+      const dotStr = '.'.repeat(dots);
+      loaderText.innerHTML = `${label} ${dotStr}`;
+      a++;
     }, 500);
   }
 
@@ -413,6 +406,9 @@ function ui_events(modal) {
       var clicking=false
       if (target.id === 'approve' && target.classList.contains('approve-btn')) {
         let sections = [];
+        target.style.backgroundColor="#8c8c8c";
+        target.disabled = true;
+        target.innerHTML = "Initiating Coding";
         let section_names = [];
 
         let checks = document.querySelectorAll(".plan-section");
@@ -425,7 +421,7 @@ function ui_events(modal) {
             });
           }
         });
-        
+      
         if(!arraysEqual(sections_,section_names)){
           sections_=section_names
           clicking=true
@@ -452,11 +448,9 @@ function ui_events(modal) {
         console.log('Suggestion badge clicked:', target.getAttribute('prompt'));
       }
   });
-
   modalEl.setAttribute('data-listener', 'true');
-  document.getElementById("lang").value = language
-  document.getElementById("colorMode").value = color_scheme
-
+  document.getElementById("lang").value = language;
+  document.getElementById("colorMode").value = color_scheme;
 }
 
 // UI Functionality
